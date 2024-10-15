@@ -1,6 +1,6 @@
 {
     "build": {
-      "dockerfile": "./Dockerfile" // Only needed if you have a Dockerfile
+      "dockerfile": "./Dockerfile" 
     },
     "start": {
       "command": "gunicorn app:app"

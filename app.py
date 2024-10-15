@@ -88,7 +88,7 @@ def generate_verification_token(email):
 
 @app.route('/')
 def home():
-    return redirect(url_for('login'))  # Redirect to the login page
+    return redirect(url_for('register'))  # Redirect to the login page
 
 # @app.route('/register', methods=['GET', 'POST'])
 # def register():

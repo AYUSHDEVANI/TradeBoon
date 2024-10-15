@@ -129,7 +129,8 @@ function updateChart(timeframe, chartType) {
 
     if (selectedStock) {
         const chartFrame = document.getElementById('chartFrame');
-        chartFrame.src = `http://127.0.0.1:8050/?stock=${selectedStock}&timeframe=${timeframe}&chartType=${chartType}`;
+        // chartFrame.src = `http://127.0.0.1:8050/?stock=${selectedStock}&timeframe=${timeframe}&chartType=${chartType}`;
+        chartFrame.src = `https://tradeboon-production.up.railway.app/?stock=${selectedStock}&timeframe=${timeframe}&chartType=${chartType}`;
     } else {
         alert('Please select a stock first.');
     }

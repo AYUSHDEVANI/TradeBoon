@@ -372,6 +372,8 @@ def logout():
     return redirect(url_for('login'))
 
 
+
+
 from flask import Flask, request, jsonify
 import yfinance as yf
 import pandas as pd
@@ -677,6 +679,7 @@ def get_real_time_stock_info(stock_symbol):
 
     except Exception as e:
         return jsonify({"error": str(e)}),500
+
 
 
 if __name__ == '__main__':

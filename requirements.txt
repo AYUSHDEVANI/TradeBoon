@@ -9,3 +9,5 @@ pyjwt
 dash
 yfinance
 pandas
+plotly
+urllib3

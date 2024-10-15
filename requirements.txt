@@ -5,3 +5,4 @@ Flask-PyMongo
 werkzeug
 flask-mail
 gunicorn
+pyjwt

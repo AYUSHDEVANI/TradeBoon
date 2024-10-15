@@ -167,7 +167,29 @@ def register():
             'created_at': datetime.datetime.utcnow(),
             'updated_at': datetime.datetime.utcnow()
         })
+        initial_balance = 12000.00
+
+        account = {
         
+            "username": user.username,
+            "balance": initial_balance,
+            "currency": "INR",
+            "created_at": datetime.datetime.now(),
+            "updated_at": datetime.datetime.now(),
+            "last_transaction_date": datetime.datetime.now(),
+            "transactions": [
+                {
+                    "transaction_id": ObjectId(),
+                    "transaction_type": "deposit",
+                    "amount": 5000.00,
+                    "balance_after_transaction": initial_balance,
+                    "transaction_date": datetime.datetime.now(),
+                    "description": "Initial deposit",
+                    "status": "completed"
+                }
+            ]
+        }        
+        mongo.db.accounts.insert_one(account)
         flash('Registration successful! Please log in.', 'success')
         return redirect(url_for('login'))
     

@@ -1,0 +1,86 @@
+/* Footer styles */
+.footer {
+    background-color: #cccdce; /* Very light gray background for modern look */
+    color: #495057; /* Darker gray text for better readability */
+    padding: 50px 0; /* Increased padding for a spacious feel */
+    text-align: left; /* Align text to left */
+    border-top: 1px solid #e9ecef; /* Thin border on top */
+    font-family: 'Poppins', sans-serif; /* Modern sans-serif font */
+}
+
+.footer h5 {
+    font-size: 1.6rem; /* Larger section titles for emphasis */
+    font-weight: bold; /* Bold section titles */
+    margin-bottom: 25px; /* Space between title and content */
+    color: #343a40; /* Darker gray for section titles */
+}
+
+.footer p {
+    color: #6c757d; /* Muted gray for paragraph text */
+    font-size: 1rem; /* Standard font size */
+    line-height: 1.7; /* Increased line height for readability */
+}
+
+.footer-links {
+    list-style: none; /* Remove bullet points */
+    padding: 0; /* No padding */
+}
+
+.footer-links li {
+    margin-bottom: 12px; /* Space between list items */
+}
+
+.footer-links a {
+    color: #6c757d; /* Muted gray for links */
+    text-decoration: none; /* Remove underline */
+    font-weight: 500; /* Slightly bold links */
+    transition: color 0.3s ease; /* Smooth color transition */
+}
+
+.footer-links a:hover {
+    color: #007bff; /* Blue on hover for contrast */
+    text-decoration: underline; /* Underline on hover */
+}
+
+/* Social Icons */
+.social-icons a {
+    color: #6c757d; /* Muted gray for social icons */
+    font-size: 1.5rem; /* Icon size */
+    margin-right: 20px; /* Space between icons */
+    transition: color 0.3s ease, transform 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.social-icons a:hover {
+    color: #007bff; /* Blue on hover */
+    transform: scale(1.2); /* Slight grow on hover */
+}
+
+/* Copyright text */
+.copyright {
+    margin-top: 30px; /* Space above the copyright text */
+    color: #6c757d; /* Muted gray for copyright text */
+    font-size: 0.9rem; /* Slightly smaller font */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .footer {
+        text-align: center; /* Center text for smaller screens */
+    }
+
+    .footer h5 {
+        font-size: 1.4rem; /* Slightly smaller titles on mobile */
+    }
+
+    .footer-links {
+        margin-bottom: 20px; /* Space between link blocks */
+    }
+
+    .social-icons {
+        margin-top: 20px; /* Add space on smaller screens */
+    }
+
+    .social-icons a {
+        margin-right: 15px; /* Adjust space between icons */
+    }
+}

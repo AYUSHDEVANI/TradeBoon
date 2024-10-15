@@ -1,0 +1,257 @@
+/* Nav Bar */
+
+header{
+    background: #2a869270;
+    height: 66px;
+}
+
+body{
+    background: #f5eeee;
+    padding: 0px;
+    margin: 0px;
+}
+
+header .logo{
+    float:left;
+    height: inherit;
+    margin-left: 2em;
+
+}
+
+
+header .logo-text{
+    margin: 10px;
+}
+header ul{
+    float: right;
+    margin: 0px;
+    padding: 0px;
+    list-style-type: none;
+}
+
+header *{
+    color: #f5eeee;
+}
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", sans-serif;
+}
+
+header ul li{
+    float: left;
+}
+
+header ul li a{
+    display: block;
+    padding: 21px;
+    font-size: 1.5em;
+    text-decoration: none;
+}
+
+header ul li a:hover{
+    background: rgb(113, 222, 203);
+    transition: 0.5s;
+}
+
+.stock{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0.5;
+}
+
+.about{
+    background-color: rgb(0, 0, 1);
+    height: 30%;
+    font-size: 50px;
+    color: rgba(255, 254, 254, 0.958);
+    padding-left: 35%;
+    align-content: center;
+    width: 100%;
+    margin-top: 50px; ;
+}
+
+.menu{
+    width:100%;
+    padding:30px;
+    position: relative;
+
+}
+
+.menu h1{
+    font-size:55px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+    color: aliceblue;
+    background-color: rgb(47, 6, 6);
+}
+
+.menu .box{
+    width: 95%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap:15px;
+
+}
+
+
+.menu .box .card{
+    width:300px;
+    height: 400px;
+    padding-top: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+.menu .box .card .image{
+    width:300px;
+    height: 245px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.menu .box .card .image img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: 0.3s;
+}
+
+.menu .box .card .image:hover img{
+    transform: scale(1.1);
+}
+
+.menu .box .card .small_card{
+    width:45px;
+    height:45px;
+    float:right;
+    position: relative;
+    top:-250px;
+    right:6px;
+    opacity: 1;
+    border-radius: 7px;
+    transition:0.3s;
+
+}
+
+.menu .box .card:hover .small_card{
+    position:relative;
+    top:-240px;
+    right:20px;
+    opacity: 1;
+}
+
+.menu .box .card .small_card i{
+    font-size: 25px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    line-height:50px;
+    color:black;
+    cursor:pointer;
+    text-shadow: 0 0 6px rgb(251, 251, 251);
+    transition:0.2s;
+}
+
+.menu .box .card .small_card i:hover{
+
+    color: red;
+}
+
+
+
+
+.menu .box .card .info h3{
+    text-align:center;
+    margin-top:10px;
+    padding: 15px;
+}
+
+.menu .box .card .info .button{
+    display:flex;
+    align-items:center;
+    justify-content: center;
+    text-decoration: none;
+    color:white;
+    background:rgba(2, 13, 24, 0.77);
+    padding: 8px 10px;
+    margin: 0 80px;
+    transition: 0.3s;
+}
+
+
+/* footer */
+.footer{
+    background-color: #ececec;
+    display: flex;
+    justify-content: space-between;
+    padding: 10vw 10vw;
+    top: 10vw;
+    left: 10vw;
+
+}
+
+.quicklinks a{
+    text-decoration: none;
+    font-size: 1em;
+    display: grid;
+    padding: 0vw;
+}
+.social{
+    color: black;
+    text-decoration: none;
+    
+    display: grid;
+    justify-content: center;
+}
+.social a{
+    color: gray;
+    text-decoration: none;
+    font-size: 1em;
+    display: grid;
+    
+}
+
+.app h2{
+    font-weight: 600;
+    
+}
+.apt{
+    text-decoration: none;
+    display: grid;
+}
+
+.appstore{
+    width: 150px;
+}
+.bellow{
+    padding: 6px;
+    font-weight: 600;
+    padding-left: 500px;
+    background-color: #c9cacc00;
+    justify-items: center;
+    align-items: center;
+}
+
+.quick1 a{
+    color: gray;
+}
+.quick1 :hover,
+.social a:hover{
+    color: black;
+}
+
+.appstore:hover,
+.quick1 :hover,
+.social a:hover,
+.text:hover{
+    transform: translateY(2px);
+}

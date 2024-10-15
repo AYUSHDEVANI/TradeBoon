@@ -309,6 +309,7 @@ function submitOrder(orderType) {
     // Confirm order on clicking 'Confirm'
     document.getElementById('confirmOrderButton').onclick = () => {
         placeOrder(orderType, stock, quantity, price, totalValue);
+        fetchTransactions();  // Fetch transactions after placing the order
     };
 
     // Cancel the order
@@ -436,8 +437,7 @@ function calculateUnrealizedProfitLoss(transactions, currentBalance) {
     return profitLoss;
 }
 
-$(document).ready(function () {
-    fetchTransactions();
+
 
     function fetchTransactions() {
         $.ajax({
@@ -481,7 +481,7 @@ $(document).ready(function () {
             transactionBody.append(row);
         });
     }
-});
+    fetchTransactions();  // Fetch transactions on page load
 
 
 

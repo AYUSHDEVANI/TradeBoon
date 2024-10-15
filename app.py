@@ -19,6 +19,7 @@ app.secret_key = '1718'  # Replace with a random secret key
 
 # MongoDB configuration
 app.config['MONGO_URI'] = 'mongodb://localhost:27017/tradeboon1'  # Update with your MongoDB URI
+app.config['MONGO_URI'] = "mongodb+srv://ayushdevani0018:devani18@cluster0.b942bgm.mongodb.net/tradeboon"  # Update with your MongoDB URI
 mongo = PyMongo(app)
 # print("mongo",mongo)
 # print(mongo.db.users.find_one({"username": "dev123"}))

@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trade</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/trade.css') }}"
+    />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+      .trade-container {
+        width: 90%;
+        margin: auto;
+      }
+      .chart-container {
+        display: flex;
+        justify-content: space-between;
+      }
+      .chart {
+        flex: 1;
+        margin-right: 10px;
+      }
+      .watchlist {
+        flex-basis: 300px;
+        background: #f9f9f9;
+        padding: 10px;
+        border: 1px solid #ddd;
+      }
+    </style>
+  </head>
+  <body>
+    {% include 'navbar.html' %}
+    <div class="trade-container">
+      <header>
+        <h1>Stock Trading Dashboard</h1>
+        <div>
+          <button onclick="logout()">Logout</button>
+        </div>
+      </header>
+
+      <!-- Stock Selection Section -->
+      <div class="stock-selection">
+        <h2>Stock Selection</h2>
+        <div class="search-bar">
+          <input
+            type="text"
+            id="stockSearch"
+            placeholder="Search for a stock by symbol or name..."
+            oninput="filterStocks()"
+          />
+        </div>
+        <div class="dropdown-container">
+          <select id="stockDropdown" onchange="selectStock()">
+            <option value="">Select a Stock</option>
+            <option value="RELIANCE">Reliance Industries (RELIANCE)</option>
+            <option value="TCS">Tata Consultancy Services (TCS)</option>
+            <option value="INFY">Infosys (INFY)</option>
+            <option value="HDFCBANK">HDFC Bank (HDFCBANK)</option>
+            <option value="ICICIBANK">ICICI Bank (ICICIBANK)</option>
+            <option value="HINDUNILVR">Hindustan Unilever (HINDUNILVR)</option>
+            <option value="KOTAKBANK">Kotak Mahindra Bank (KOTAKBANK)</option>
+            <option value="SBIN">State Bank of India (SBIN)</option>
+            <option value="LT">Larsen & Toubro (LT)</option>
+            <option value="HCLTECH">HCL Technologies (HCLTECH)</option>
+            <option value="BHARTIARTL">Bharti Airtel (BHARTIARTL)</option>
+            <option value="ASIANPAINT">Asian Paints (ASIANPAINT)</option>
+            <option value="ITC">ITC Limited (ITC)</option>
+            <option value="AXISBANK">Axis Bank (AXISBANK)</option>
+            <option value="BAJFINANCE">Bajaj Finance (BAJFINANCE)</option>
+            <option value="MARUTI">Maruti Suzuki (MARUTI)</option>
+            <option value="WIPRO">Wipro (WIPRO)</option>
+            <option value="ADANIGREEN">Adani Green Energy (ADANIGREEN)</option>
+            <option value="ADANIPORTS">Adani Ports (ADANIPORTS)</option>
+            <option value="SUNPHARMA">Sun Pharmaceuticals (SUNPHARMA)</option>
+            <option value="TITAN">Titan Company (TITAN)</option>
+            <option value="ULTRACEMCO">UltraTech Cement (ULTRACEMCO)</option>
+            <option value="ONGC">Oil and Natural Gas Corporation (ONGC)</option>
+            <option value="NTPC">NTPC Limited (NTPC)</option>
+            <option value="POWERGRID">
+              Power Grid Corporation (POWERGRID)
+            </option>
+            <option value="TATASTEEL">Tata Steel (TATASTEEL)</option>
+            <option value="M&M">Mahindra & Mahindra (M&M)</option>
+            <option value="BPCL">Bharat Petroleum Corporation (BPCL)</option>
+            <option value="HEROMOTOCO">Hero MotoCorp (HEROMOTOCO)</option>
+            <option value="JSWSTEEL">JSW Steel (JSWSTEEL)</option>
+            <option value="COALINDIA">Coal India (COALINDIA)</option>
+            <option value="INDUSINDBK">IndusInd Bank (INDUSINDBK)</option>
+            <option value="DRREDDY">Dr. Reddy's Laboratories (DRREDDY)</option>
+            <option value="DIVISLAB">Divi's Laboratories (DIVISLAB)</option>
+            <option value="BRITANNIA">Britannia Industries (BRITANNIA)</option>
+            <option value="GRASIM">Grasim Industries (GRASIM)</option>
+            <option value="TECHM">Tech Mahindra (TECHM)</option>
+            <option value="HINDALCO">Hindalco Industries (HINDALCO)</option>
+            <option value="BAJAJFINSV">Bajaj Finserv (BAJAJFINSV)</option>
+            <option value="TATAMOTORS">Tata Motors (TATAMOTORS)</option>
+            <option value="EICHERMOT">Eicher Motors (EICHERMOT)</option>
+            <option value="PIDILITIND">Pidilite Industries (PIDILITIND)</option>
+            <option value="SHREECEM">Shree Cement (SHREECEM)</option>
+            <option value="NESTLEIND">Nestle India (NESTLEIND)</option>
+            <option value="HAVELLS">Havells India (HAVELLS)</option>
+            <option value="DMART">Avenue Supermarts (DMART)</option>
+            <option value="DABUR">Dabur India (DABUR)</option>
+            <option value="ADANIENT">Adani Enterprises (ADANIENT)</option>
+            <option value="ZEEL">Zee Entertainment Enterprises (ZEEL)</option>
+            <option value="GODREJCP">
+              Godrej Consumer Products (GODREJCP)
+            </option>
+            <option value="BANDHANBNK">Bandhan Bank (BANDHANBNK)</option>
+            <option value="ICICIGI">
+              ICICI Lombard General Insurance (ICICIGI)
+            </option>
+            <option value="MUTHOOTFIN">Muthoot Finance (MUTHOOTFIN)</option>
+            <option value="PAGEIND">Page Industries (PAGEIND)</option>
+            <option value="SIEMENS">Siemens Ltd (SIEMENS)</option>
+            <option value="COLPAL">Colgate-Palmolive (COLPAL)</option>
+            <option value="MINDTREE">Mindtree Ltd (MINDTREE)</option>
+            <option value="BERGEPAINT">Berger Paints (BERGEPAINT)</option>
+            <option value="GLENMARK">
+              Glenmark Pharmaceuticals (GLENMARK)
+            </option>
+          </select>
+          <button id="addToWatchlist" onclick="toggleWatchlist()">
+            Add to Watchlist
+          </button>
+        </div>
+        <div id="favoriteMessage" class="favorite-message"></div>
+      </div>
+
+      <!-- Real-Time Chart Element -->
+      <div class="chart-container">
+        <div class="chart">
+          <h2>Real-Time Stock Price Chart</h2>
+          <!-- Chart Type Selection -->
+          <div class="chart-type">
+            <!-- <h2>Chart Type</h2> -->
+            <label for="chart type"></label>
+            <select id="chartType" onchange="selectChartType()">
+              <option value="candlestick">Candlestick</option>
+              <option value="line">Line</option>
+              <option value="bar">Bar</option>
+              <option value="ohlc">OHLC</option>
+            </select>
+          </div>
+          <!-- Stock chart iframe -->
+          <iframe
+            id="chartFrame"
+            src="http://127.0.0.1:8050"
+            style="width: 100%; height: 700px; border: none"
+          ></iframe>
+        </div>
+        <div class="watchlist">
+          <h3>Your Watchlist</h3>
+          <ul id="watchlistItems"></ul>
+        </div>
+      </div>
+
+      <!-- Historical Data and Indicators Section -->
+      <div class="historical-data">
+        <h2>Historical Data & Indicators</h2>
+        <button onclick="updateChart('1d')">1 Day</button>
+        <button onclick="updateChart('5d')">5 Days</button>
+        <button onclick="updateChart('1m')">1 Month</button>
+        <button onclick="updateChart('1y')">1 Year</button>
+      </div>
+
+      <div class="trade-container">
+        <!-- Stock Symbol Display -->
+        <label for="selectedStock">Selected Stock:</label>
+        <input type="text" id="selectedStock" name="selectedStock" readonly />
+
+        <!-- Quantity Input -->
+        <label for="quantity">Quantity:</label>
+        <input
+          type="number"
+          id="quantity"
+          name="quantity"
+          min="1"
+          placeholder="Enter number of shares"
+          required
+        />
+
+        <!-- Price Input (Auto-updated) -->
+        <label for="price">Price:</label>
+        <input
+          type="number"
+          id="price"
+          name="price"
+          step="0.01"
+          placeholder="Market Price"
+          required
+        />
+
+        <!-- Order Types Section -->
+        <div class="order-type">
+          <h3>Order Types</h3>
+
+          <div class="order-type-selection">
+            <label for="orderType">Order Type:</label>
+            <select id="orderType">
+              <option value="market">Market Order</option>
+              <option value="limit">Limit Order</option>
+              <option value="stopLoss">Stop Loss</option>
+              <option value="stopLimit">Stop Limit</option>
+            </select>
+          </div>
+
+          <div class="time-in-force-selection">
+            <label for="timeInForce">Time in Force:</label>
+            <select id="timeInForce">
+              <option value="day">Good for Day</option>
+              <option value="gtc">Good Till Canceled</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Buy and Sell Buttons -->
+        <div class="trade-buttons">
+          <button id="buyBtn" class="trade-btn buy-btn">Buy</button>
+          <button id="sellBtn" class="trade-btn sell-btn">Sell</button>
+          <button id="previewBtn" class="preview-btn">Preview Order</button>
+        </div>
+
+        <div id="confirmationDialog" style="display: none">
+          <h3>Confirm Your Order</h3>
+          <p id="orderDetails"></p>
+          <button id="confirmOrderButton">Confirm</button>
+          <button id="cancelOrderButton">Cancel</button>
+        </div>
+
+        <p id="orderMessage"></p>
+      </div>
+
+      <!-- Confirmation Dialog (hidden by default) -->
+      <div id="confirmationDialog" class="modal">
+        <div class="modal-content">
+          <span class="close-btn">&times;</span>
+          <h2>Confirm Your Order</h2>
+          <div id="orderDetails"></div>
+          <button id="confirmOrderBtn" class="confirm-btn">
+            Confirm Order
+          </button>
+        </div>
+      </div>
+
+      <div class="portfolio-overview">
+        <h2>Portfolio Overview</h2>
+        <div id="portfolioBalance">
+          <h3>Current Balance</h3>
+          <p id="currentBalance"></p>
+        </div>
+        <div id="investmentOverview">
+          <h3>Investment Overview</h3>
+          <p id="totalInvestment"></p>
+          <p id="unrealizedProfitLoss"></p>
+        </div>
+      </div>
+
+      <div class="transaction-history">
+        <h2>Transaction History</h2>
+        <table id="transactionTable">
+          <thead>
+            <tr>
+              <th>Transaction ID</th>
+              <th>Stock Symbol</th>
+              <th>Transaction Type</th>
+              <th>Shares</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Total Amount</th>
+              <th>Transaction Date</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="transactionBody">
+            <!-- Transaction rows will be populated here via JavaScript -->
+          </tbody>
+        </table>
+        <div id="noTransactionsMessage" style="display: none">
+          <p>No recent transactions available.</p>
+        </div>
+      </div>
+
+      <div class="charts-graphs">
+        <h2>Charts & Graphs</h2>
+
+        <div class="chart-container">
+          <h3>Performance Graph</h3>
+          <canvas id="performanceGraph"></canvas>
+        </div>
+
+        <div class="chart-container">
+          <h3>Portfolio Impact Graph</h3>
+          <canvas id="portfolioImpactGraph"></canvas>
+          <div id="portfolioImpactContainer"></div>
+        </div>
+
+        <div class="chart-container">
+          <h3>Market Sentiment</h3>
+          <canvas id="marketSentimentGraph"></canvas>
+        </div>
+      </div>
+
+      <div class="stock-info-panel">
+        <h2>Stock Info Panel</h2>
+
+        <div class="stock-card">
+          <div class="stock-header">
+            <h3 id="stockSymbol">Stock Symbol: TATASTEEL</h3>
+            <p id="stockPrice">₹135.50</p>
+          </div>
+          <div class="stock-details">
+            <div class="stock-volume">
+              <span>Volume:</span>
+              <span id="stockVolume">1.2M</span>
+            </div>
+            <div class="stock-market-cap">
+              <span>Market Cap:</span>
+              <span id="marketCap">₹2.1T</span>
+            </div>
+          </div>
+
+          <!-- Collapsible Section for Additional Details -->
+          <div class="collapsible">
+            <input type="checkbox" id="collapsible-toggle" />
+            <label for="collapsible-toggle" class="toggle-label">
+              <span>View More Details</span>
+            </label>
+            <div class="collapsible-content">
+              <div class="additional-details">
+                <div class="detail-item">
+                  <span>P/E Ratio:</span>
+                  <span id="peRatio">29.35</span>
+                </div>
+                <div class="detail-item">
+                  <span>Dividend Yield:</span>
+                  <span id="dividendYield">1.2%</span>
+                </div>
+                <div class="detail-item">
+                  <span>52 Week High:</span>
+                  <span id="weekHigh">₹150.00</span>
+                </div>
+                <div class="detail-item">
+                  <span>52 Week Low:</span>
+                  <span id="weekLow">₹115.00</span>
+                </div>
+                <div class="detail-item">
+                  <span>Earnings Date:</span>
+                  <span id="earningsDate">2024-11-05</span>
+                </div>
+                <div class="detail-item">
+                  <span>Dividend Date:</span>
+                  <span id="dividendDate">2024-12-01</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <p>© 2024 TradeBoon - All Rights Reserved</p>
+      </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/trade.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </body>
+</html>

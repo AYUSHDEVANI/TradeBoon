@@ -1,0 +1,18 @@
+<!-- verify_otp.html -->
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Verify OTP</title>
+</head>
+<body>
+    <h1>Verify OTP</h1>
+    <form method="POST">
+        <input type="hidden" name="email" value="{{ email }}">
+        <label for="otp">Enter the OTP sent to your email:</label>
+        <input type="text" id="otp" name="otp" required>
+        <button type="submit">Verify OTP</button>
+    </form>
+</body>
+</html>

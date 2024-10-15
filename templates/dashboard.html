@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+</head>
+<body>
+    {% include 'navbar.html' %}
+    <div class="dashboard-container">
+        <h1 clss ="username" style="text-align: center;">Welcome, {{ username }}!</h1>
+
+        
+        <div class="portfolio-container">
+            <h2>Your Portfolio</h2>
+            
+            <!-- Portfolio Overview Section -->
+            <div class="portfolio-overview">
+                <div class="overview-item">
+                    <h4>Total Investment</h4>
+                    <p>$10,000</p>
+                </div>
+                <div class="overview-item">
+                    <h4>Current Portfolio Value</h4>
+                    <p>$12,500</p>
+                </div>
+                <div class="overview-item">
+                    <h4>Profit/Loss</h4>
+                    <p>+ $2,500</p>
+                </div>
+                <div class="overview-item">
+                    <h4>Available Cash</h4>
+                    <p>$2,000</p>
+                </div>
+            </div>
+        
+            <!-- Stocks Breakdown Section -->
+            <table class="stock-breakdown-table">
+                <thead>
+                    <tr>
+                        <th>Stock Symbol</th>
+                        <th>Shares</th>
+                        <th>Purchase Price</th>
+                        <th>Current Price</th>
+                        <th>Profit/Loss (%)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for stock in stocks %}
+                    <tr>
+                        <td>{{ stock.symbol }}</td>
+                        <td>{{ stock.shares }}</td>
+                        <td>${{ stock.purchase_price }}</td>
+                        <td>${{ stock.current_price }}</td>
+                        <td class="{% if stock.profit_loss >= 0 %}profit{% else %}loss{% endif %}">
+                            {{ "%.2f" % stock.profit_loss }}%
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        
+            <!-- Recent Transactions Section -->
+            <div class="recent-transactions">
+                <h2>Recent Transactions</h2>
+                <table class="recent-transactions-table">
+                    <thead>
+                        <tr>
+                            <th>Stock Symbol</th>
+                            <th>Type</th>
+                            <th>Shares</th>
+                            <th>Price/Share</th>
+                            <th>Total Value</th>
+                            <th>Date & Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for transaction in transactions %}
+                        <tr>
+                            <td>{{ transaction.symbol }}</td>
+                            <td data-type="{{ transaction.type }}">{{ transaction.type }}</td>
+                            <td>{{ transaction.shares }}</td>
+                            <td>${{ transaction.price_per_share }}</td>
+                            <td>${{ transaction.total_value }}</td>
+                            <td>{{ transaction.date.strftime('%Y-%m-%d %H:%M') }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        
+            <!-- Portfolio Composition Chart -->
+            <div class="portfolio-composition">
+                <h2>Portfolio Composition</h2>
+                <iframe src="/dashboard/" style="width: 100%; height: 600px; border: none;"></iframe>
+            </div>
+            <h2>Stock Prices</h2>
+            <div id="stock-graph"></div>
+    
+            
+        </div>
+       
+        </div>
+
+    
+
+
+    
+
+<!--     
+    <h2>Recent Transactions</h2>
+    <div id="transaction-graph"></div> -->
+    
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var trace1 = {
+                x: [1, 2, 3, 4],
+                y: [10, 15, 13, 17],
+                mode: 'lines+markers',
+                type: 'scatter'
+            };
+    
+            var data = [trace1];
+    
+            var layout = {
+                title: 'Stock Price Over Time',
+                xaxis: {
+                    title: 'Time'
+                },
+                yaxis: {
+                    title: 'Price'
+                }
+            };
+    
+            Plotly.newPlot('stock-graph', data, layout);
+        });
+    </script>
+
+</body>
+</html>

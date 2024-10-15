@@ -1,0 +1,110 @@
+/* Global Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Login Form Container */
+h1 {
+    text-align: center;
+    color: #fff;
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    /* margin-top: -25%; */
+    /* margin-left: 20%; */
+}
+
+form {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    max-width: 400px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Input Fields */
+form input {
+    font-size: 1rem;
+    padding: 0.75rem;
+    margin-bottom: 1.25rem;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    transition: border-color 0.3s ease;
+}
+
+form input:hover, 
+form input:focus {
+    border-color: #6a11cb;
+    outline: none;
+}
+
+/* Submit Button */
+form input[type="submit"] {
+    background: linear-gradient(135deg, #ff7e5f 0%, #feb47b 100%);
+    color: #fff;
+    border: none;
+    font-size: 1.1rem;
+    font-weight: bold;
+    padding: 0.75rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    border-radius: 5px;
+    width: 100%;
+}
+
+form input[type="submit"]:hover {
+    background: linear-gradient(135deg, #feb47b 0%, #ff7e5f 100%);
+}
+
+/* Flash Messages */
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 1.5rem;
+    text-align: center;
+}
+
+ul li {
+    background: rgba(255, 94, 94, 0.1);
+    padding: 0.75rem;
+    border: 1px solid rgba(255, 94, 94, 0.4);
+    color: #ff5e5e;
+    margin-bottom: 0.75rem;
+    border-radius: 5px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    form {
+        padding: 1.5rem;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    form {
+        padding: 1rem;
+    }
+
+    h1 {
+        font-size: 1.75rem;
+    }
+
+    form input {
+        font-size: 0.9rem;
+    }
+}

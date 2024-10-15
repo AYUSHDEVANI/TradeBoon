@@ -1,0 +1,71 @@
+/* General styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f0f4f8; /* Light background */
+}
+
+/* Navbar styles */
+.navbar {
+    background-color: #ffffff; /* White background for navbar */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    border-radius: 0 0 20px 20px; /* Rounded bottom corners */
+    transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+.navbar:hover {
+    background-color: #e0f2f1; /* Light teal on hover */
+}
+
+.navbar-brand {
+    font-size: 1.8rem; /* Larger brand font size */
+    font-weight: bold; /* Bold font */
+    color: #009688; /* Teal color for brand */
+    transition: color 0.3s ease; /* Smooth transition */
+}
+
+.navbar-brand:hover {
+    color: #00796b; /* Darker teal on hover */
+}
+
+/* Navbar links */
+.nav-link {
+    font-size: 1.2rem; /* Font size for links */
+    color: #333; /* Dark gray for link color */
+    padding: 10px 15px; /* Padding for links */
+    transition: color 0.3s ease, background-color 0.3s ease; /* Smooth transition */
+    border-radius: 5px; /* Rounded corners */
+}
+
+.nav-link:hover {
+    background-color: #009688; /* Teal background on hover */
+    color: white; /* White text on hover */
+}
+
+/* Toggler button */
+.navbar-toggler {
+    border: none; /* Remove border */
+}
+
+.navbar-toggler-icon {
+    background-color: #009688; /* Teal for toggler icon */
+    border-radius: 5px; /* Rounded corners for toggler */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .navbar-nav {
+        flex-direction: column; /* Stack links vertically on small screens */
+        background-color: #ffffff; /* White background for dropdown */
+        border-radius: 0 0 20px 20px; /* Rounded corners for dropdown */
+        position: absolute; /* Positioning for dropdown */
+        width: 100%; /* Full width */
+        top: 60px; /* Position below navbar */
+        left: 0; /* Align to left */
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Shadow for dropdown */
+        z-index: 1; /* Ensure it appears above other elements */
+    }
+
+    .nav-link {
+        padding: 15px; /* Increase padding for mobile */
+    }
+}

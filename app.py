@@ -30,6 +30,7 @@ app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USERNAME'] = 'shreeji1801@gmail.com'
 app.config['MAIL_PASSWORD'] = 'sinb jjtm vzoq what'
+app.config["MAIL_DEFAULT_SENDER"] = 'shreeji1801@gmail.com'
 
 mail = Mail(app)
 
@@ -141,57 +142,101 @@ def home():
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegistrationForm()
+    otp_sent = False  # Initialize variable
+
     if form.validate_on_submit():
         if mongo.db.users.find_one({'username': form.username.data}):
             flash('Username already exists!', 'danger')
             return redirect(url_for('register'))
         
-        user = User(form.username.data, form.password.data)
+        if "send_otp" in request.form:
+            # Generate a random 6-digit OTP
+            otp = str(random.randint(100000, 999999))
+            otp_storage[form.email.data] = otp  # Store OTP temporarily
+            otp_storage["email"] = form.email.data
+            otp_storage["otp"] = otp
+            print(otp_storage["otp"])
 
-        # Convert date_of_birth from datetime.date to datetime.datetime
-        date_of_birth = datetime.datetime.combine(form.date_of_birth.data, datetime.datetime.min.time())
+            # Create and send the OTP email
+            msg = Message('Your OTP Code', sender=f"TradeBoon {app.config['MAIL_USERNAME']}", recipients=[form.email.data])    
+            msg.subject = 'OTP Code'
+            msg.body = f'Your OTP code is: {otp}'
+            # msg.recipients = ['[email protected]']  # Replace email with placeholder text
+            # msg.add_header('Content-Type', 'text/html')
+
+            msg.body = f'Your OTP code is: {otp}'
+            mail.send(msg)
+
+            flash('OTP sent successfully! Please check your email.', 'success')
+            otp_sent = True
+            return render_template('register.html', form=form, otp_sent=otp_sent)
         
-        password_hash = generate_password_hash(user.password_hash)
+        elif "verify_otp" in request.form:
+            email = form.email.data
+            entered_otp = form.otp.data
+            print(email)
+            print(entered_otp)
+            print(otp_storage)
+            if  str(otp_storage["otp"]) == str(entered_otp):
+                del otp_storage[email]  # Remove the OTP after successful verification
+                user = User(form.username.data, form.password.data)
 
-        mongo.db.users.insert_one({
-            'username': user.username,
-            'password_hash': password_hash,
-            'email': form.email.data,
-            'full_name': form.full_name.data,
-            'date_of_birth': date_of_birth,
-            'phone_number': form.phone_number.data,
-            'government_id_type': form.government_id_type.data,
-            'government_id_number': form.government_id_number.data,
-            'government_id_image': 'path_to_image',  # Handle image upload separately
-            'verification_status': 'pending',
-            'created_at': datetime.datetime.utcnow(),
-            'updated_at': datetime.datetime.utcnow()
-        })
-        initial_balance = 12000.00
-
-        account = {
+                # Convert date_of_birth from datetime.date to datetime.datetime
+                date_of_birth = datetime.datetime.combine(form.date_of_birth.data, datetime.datetime.min.time())
         
-            "username": user.username,
-            "balance": initial_balance,
-            "currency": "INR",
-            "created_at": datetime.datetime.now(),
-            "updated_at": datetime.datetime.now(),
-            "last_transaction_date": datetime.datetime.now(),
-            "transactions": [
-                {
-                    "transaction_id": ObjectId(),
-                    "transaction_type": "deposit",
-                    "amount": 5000.00,
-                    "balance_after_transaction": initial_balance,
-                    "transaction_date": datetime.datetime.now(),
-                    "description": "Initial deposit",
-                    "status": "completed"
-                }
-            ]
-        }        
-        mongo.db.accounts.insert_one(account)
-        flash('Registration successful! Please log in.', 'success')
-        return redirect(url_for('login'))
+                password_hash = generate_password_hash(user.password_hash)
+
+                mongo.db.users.insert_one({
+                    'username': user.username,
+                    'password_hash': password_hash,
+                    'email': form.email.data,
+                    'full_name': form.full_name.data,
+                    'date_of_birth': date_of_birth,
+                    'phone_number': form.phone_number.data,
+                    'government_id_type': form.government_id_type.data,
+                    'government_id_number': form.government_id_number.data,
+                    'government_id_image': 'path_to_image',  # Handle image upload separately
+                    'verification_status': 'verified',
+                    'created_at': datetime.datetime.utcnow(),
+                    'updated_at': datetime.datetime.utcnow()
+                })
+                initial_balance = 12000.00
+
+                account = {
+        
+                    "username": user.username,
+                    "balance": initial_balance,
+                    "currency": "INR",
+                    "created_at": datetime.datetime.now(),
+                    "updated_at": datetime.datetime.now(),
+                    "last_transaction_date": datetime.datetime.now(),
+                    "transactions": [
+                        {
+                            "transaction_id": ObjectId(),
+                            "transaction_type": "deposit",
+                            "amount": 5000.00,
+                            "balance_after_transaction": initial_balance,
+                            "transaction_date": datetime.datetime.now(),
+                            "description": "Initial deposit",
+                            "status": "completed"
+                        }
+                    ]
+                }        
+                mongo.db.accounts.insert_one(account)
+               
+                # Update user's verification status in the database
+                # mongo.db.users.updateOne({"username": user.username}, {'$set': {'verification_status': 'verified'}})
+                flash('OTP verified successfully! Please log in.', 'success')
+                return redirect(url_for('login', email=email))
+            else:
+                flash('Invalid OTP. Please try again.', 'danger')
+                return render_template('register.html', form=form, otp_sent=True)
+            
+
+        
+        
+        
+
     
     return render_template('register.html', form=form)     
 
@@ -702,6 +747,78 @@ def get_real_time_stock_info(stock_symbol):
 
     except Exception as e:
         return jsonify({"error": str(e)}),500
+
+
+
+
+
+
+
+
+@app.route('/api/portfolio', methods=['GET'])
+def get_portfolio():
+    # This function should calculate the required values
+    total_investment = 10000  # Fetch from your database
+    current_portfolio_value = 12500  # Fetch from your database
+    profit_loss = current_portfolio_value - total_investment
+    available_cash = 2000  # Fetch from your database
+
+    return jsonify({
+        'total_investment': total_investment,
+        'current_portfolio_value': current_portfolio_value,
+        'profit_loss': profit_loss,
+        'available_cash': available_cash
+    })
+
+@app.route('/api/stocks', methods=['GET'])
+def get_stocks():
+    # username = request.args.get('username')  # Assuming you want to filter by username
+    # Fetch the stocks for the given username from your database
+    username = current_user.username
+    stocks = list(mongo.db.orders.find({"username": username}))
+    print("Stocks: ",stocks)
+    
+    # Transform the stocks data to the required format
+    formatted_stocks = []
+    for stock in stocks:
+        current_price = fetch_current_price(stock['stock_symbol'])  # Function to fetch current price from yfinance
+        profit_loss = ((current_price - stock['price']) / stock['price']) * 100  # Calculate profit/loss percentage
+        print(profit_loss)
+
+        formatted_stocks.append({
+            "symbol": stock['stock_symbol'],
+            "shares": stock['quantity'],
+            "purchase_price": stock['price'],
+            "current_price": current_price,
+            "profit_loss": profit_loss
+        })
+
+    return jsonify(formatted_stocks)
+
+def fetch_current_price(stock_symbol):
+    import yfinance as yf
+    stock = yf.Ticker(f"{stock_symbol}.NS") # Append .NS for NSE stocks
+    return stock.history(period="1d")['Close'].iloc[-1]  # Get the latest closing price
+
+@app.route('/api/transactions_dashboard', methods=['GET'])
+def get_transactions_dashboard():
+    # username = request.args.get('username')  # Get the username from query params
+    username = current_user.username
+    transactions = list(mongo.db.orders.find({"username": username}).sort("created_at", -1).limit(10))  # Get recent 10 transactions
+
+    # Transform transactions to the required format
+    formatted_transactions = []
+    for transaction in transactions:
+        formatted_transactions.append({
+            "symbol": transaction['stock_symbol'],
+            "type": transaction['order_type'],
+            "shares": transaction['quantity'],
+            "price_per_share": transaction['price'],
+            "total_value": transaction['total_value'],
+            "date": transaction['created_at'].strftime('%Y-%m-%d %H:%M')  # Format the date
+        })
+
+    return jsonify(formatted_transactions)
 
 
 

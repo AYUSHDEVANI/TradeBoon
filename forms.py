@@ -17,6 +17,7 @@ class RegistrationForm(FlaskForm):
     phone_number = StringField('Phone Number', validators=[DataRequired(), Length(min=10, max=15)])
     government_id_type = SelectField('Government ID Type', choices=[('Aadhar', 'Aadhar'), ('PAN', 'PAN'), ('Passport', 'Passport')], validators=[DataRequired()])
     government_id_number = StringField('Government ID Number', validators=[DataRequired()])
+    otp = StringField('OTP')  # Add this line for OTP
     submit = SubmitField('Register')
 
 class LoginForm(FlaskForm):

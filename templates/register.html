@@ -47,10 +47,25 @@
                 {{ form.government_id_number.label }} 
                 {{ form.government_id_number(size=32) }}<br>
             </div>
+
+            <!-- OTP Verification Section -->
+            {% if otp_sent %}
+            <div>
+                <label for="otp">Enter the OTP sent to your email:</label>
+                <input type="text" id="otp" name="otp" required>
+                <button type="submit" name="verify_otp">Verify OTP</button>
+            </div>
+            {% else %}
+            <div>
+                <button type="submit" name="send_otp">Send OTP</button>
+            </div>
+            {% endif %}
+
             <div>
                 {{ form.submit() }}
             </div>
         </form>
+
         <p class="text-center mt-3">Already have an account? <a href="{{ url_for('login') }}">Login here</a></p>
         {% with messages = get_flashed_messages() %}
             {% if messages %}

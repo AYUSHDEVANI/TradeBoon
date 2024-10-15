@@ -4,6 +4,7 @@ let selectedTimeframe = '1 day'; // Default timeframe
 let selectedChartType = 'line'; // Default chart type
 let selectedStockSymbol = 'TATASTEEL'; // This will hold the selected stock symbol
 let currentStockPrice = '';  // This will hold the current stock price
+let selectedStock = 'TATASTEEL';  // Default selected stock symbol
 
 // Function to filter stocks based on user input
 function filterStocks() {
@@ -20,7 +21,7 @@ function filterStocks() {
 // Function to select a stock and update the chart
 function selectStock() {
     const dropdown = document.getElementById('stockDropdown');
-    const selectedStock = dropdown.value;
+    selectedStock = dropdown.value;
     selectedStockSymbol = selectedStock;  // Update the global variable
 
     if (selectedStock) {

@@ -6,3 +6,4 @@ werkzeug
 flask-mail
 gunicorn
 pyjwt
+dash

@@ -7,3 +7,5 @@ flask-mail
 gunicorn
 pyjwt
 dash
+yfinance
+pandas

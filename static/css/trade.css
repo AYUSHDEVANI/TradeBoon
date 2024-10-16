@@ -297,12 +297,14 @@ header button:hover {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* padding-right: 5%; */
 }
 
 .transaction-history table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 10px;
+    /* padding-right: 60%; */
 }
 
 .transaction-history th,
@@ -319,6 +321,29 @@ header button:hover {
 
 .transaction-history td {
     background: #f9f9f9;
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+    .transaction-history table {
+        display: block; /* Make table block for scrolling */
+        overflow-x: auto; /* Enable horizontal scroll */
+        white-space: nowrap; /* Prevent text wrapping */
+    }
+
+    .transaction-history th,
+    .transaction-history td {
+        padding: 10px; /* Adjust padding for smaller screens */
+        font-size: 0.9rem; /* Smaller font size */
+    }
+}
+
+@media (max-width: 480px) {
+    .transaction-history th,
+    .transaction-history td {
+        padding: 6px; /* Further adjust padding for very small screens */
+        font-size: 0.5rem; /* Smaller font size for very small screens */
+    }
 }
 
 /* Stock Info Panel */

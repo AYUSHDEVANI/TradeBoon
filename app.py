@@ -53,22 +53,26 @@ class User(UserMixin):
         print(f"Looking for user with username: {username}")
         user_data = mongo.db.users.find_one({'username': username})
         if user_data:
-            print(f"User found: {user_data}")
-            email = user_data['email']
+            # print(f"User found: {user_data}")
+            user_email = user_data['email']
             return User(
                 username=user_data['username'],
                 password_hash=user_data['password_hash'],
-                user_id=str(user_data['_id'])  # Store as string
+                user_id=str(user_data['_id']),  # Store as string
+                email = user_email
             )
         print("User not found!")
         return None
+
+    # @staticmethod
+    # def get_email_by_username(username):
 
     @staticmethod
     def get_user_by_id(user_id):
         print(f"Looking for user with ID: {user_id}")
         user_data = mongo.db.users.find_one({'_id': ObjectId(user_id)})
         if user_data:
-            print(f"User found: {user_data}")
+            # print(f"User found: {user_data}")
             return User(
                 username=user_data['username'],
                 password_hash=user_data['password_hash'],
@@ -265,7 +269,7 @@ def verify_otp():
             flash('OTP verified successfully! Please log in.', 'success')
             return redirect(url_for('login', email=email))
         else:
-            print("hhhh")
+            # print("hhhh")
             flash('Invalid OTP. Please try again.', 'danger')
 
     return render_template('verify_otp.html')  # Make sure to create this template
@@ -283,6 +287,7 @@ def login():
             return redirect(url_for('login'))
         
         if check_password_hash(user1.password_hash, form.password.data):
+            
             login_user(user1)
             flash('Login successful!', 'success')
             return redirect(url_for('dashboard'))
@@ -588,7 +593,7 @@ def portfolio_overview():
     try:
         if current_user.is_authenticated:
             username = current_user.username  # Get username from current_user
-            print(f"Fetching account for username: {username}")
+            # print(f"Fetching account for username: {username}")
 
             account = mongo.db.accounts.find_one({"username": username})
             if account:
@@ -729,7 +734,7 @@ ALPHA_VANTAGE_API_KEY = 'QA0M6Z22951Y4OHA'  # Replace with your actual API key
 
 @app.route('/api/market_sentiment/<string:stock_symbol>', methods=['GET'])
 def get_market_sentiment(stock_symbol):
-    print(stock_symbol)
+    # print(stock_symbol)
     # stock_symbol = 'AAPL'  # Example stock symbol
     url = f'https://www.alphavantage.co/query?function=NEWS_SENTIMENT&tickers={stock_symbol}&apikey={ALPHA_VANTAGE_API_KEY}'
 
@@ -738,7 +743,7 @@ def get_market_sentiment(stock_symbol):
         response.raise_for_status()  # Raise an error for bad responses
 
         sentiment_data = response.json()
-        print("API response:", sentiment_data)    # Log the entire response for debugging
+        # print("API response:", sentiment_data)    # Log the entire response for debugging
 
         # Check if 'feed' exists and has elements
         if 'feed' in sentiment_data and sentiment_data['feed']:
@@ -826,14 +831,14 @@ def get_stocks():
     # Fetch the stocks for the given username from your database
     username = current_user.username
     stocks = list(mongo.db.orders.find({"username": username}))
-    print("Stocks: ",stocks)
+    # print("Stocks: ",stocks)
     
     # Transform the stocks data to the required format
     formatted_stocks = []
     for stock in stocks:
         current_price = fetch_current_price(stock['stock_symbol'])  # Function to fetch current price from yfinance
         profit_loss = ((current_price - stock['price']) / stock['price']) * 100  # Calculate profit/loss percentage
-        print(profit_loss)
+        # print(profit_loss)
 
         formatted_stocks.append({
             "symbol": stock['stock_symbol'],
@@ -871,6 +876,57 @@ def get_transactions_dashboard():
     return jsonify(formatted_transactions)
 
 
+@app.route('/send_order_confirmation', methods=['POST'])
+def send_order_confirmation():
+    # form = LoginForm()
+    user2 = User.get_user_by_username(current_user.username)
+    user_email = user2.email
+    # print(user_email)
+    data = request.json
+    
+    stock_symbol = data['stock']
+    quantity = float(data['quantity'])
+    price = float(data['price'])
+    order_type = data['order_type']
+
+    total_amount = float(quantity) * float(price)
+
+    # Prepare email message
+    subject = f"Order Confirmation for {stock_symbol} ({order_type.capitalize()})"
+    body = f"""
+    Dear Customer,
+
+    Your {order_type} order has been successfully placed. Here are the details:
+
+    Stock: {stock_symbol}
+    Order Type: {order_type.capitalize()} 
+    Quantity: {quantity}
+    Price per Share: ₹{price:.2f}
+    Total Amount: ₹{total_amount:.2f}
+
+    Thank you for trading with TradeBoon!
+
+    Best regards,
+    TradeBoon Team
+    """
+    
+    # Construct the email message
+    msg = Message(
+        subject=subject,
+        sender=f"TradeBoon {app.config['MAIL_USERNAME']}",
+        recipients=[user_email],  # Send to user's email
+        body=body
+    )
+    
+
+   
+    
+    # Send the email
+    try:
+        mail.send(msg)
+        return jsonify({'status': 'success', 'message': 'Confirmation email sent successfully!'})
+    except Exception as e:
+        return jsonify({'status': 'error', 'message': str(e)})
 
 if __name__ == '__main__':
     app.run(debug=True)

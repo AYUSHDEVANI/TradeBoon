@@ -5,6 +5,7 @@ let selectedChartType = 'line'; // Default chart type
 let selectedStockSymbol = 'TATASTEEL'; // This will hold the selected stock symbol
 let currentStockPrice = '';  // This will hold the current stock price
 let selectedStock = 'TATASTEEL';  // Default selected stock symbol
+let orderType = "sell"
 
 // Function to filter stocks based on user input
 function filterStocks() {
@@ -723,3 +724,45 @@ async function fetchStockInfo(stockSymbol) {
 }
 
 
+
+
+document.getElementById('confirmOrderButton').addEventListener('click', function() {
+    // Gather order details
+    const selectedStock = document.getElementById('selectedStock').value;
+    const quantity = document.getElementById('quantity').value;
+    const price = document.getElementById('price').value;
+    // const orderType = document.getElementById('orderType').value;
+    const orderType = document.getElementById('buyBtn').classList.contains('selected') ? 'Buy' : 'Sell';
+    // const userEmail = 'user@example.com'; // Replace this with actual user's email from your system
+    // const userName = 'User Name'; // Replace this with actual user's name
+    
+    // Prepare the data to be sent in the request
+    const orderDetails = {
+        stock: selectedStock,
+        quantity: quantity,
+        price: price,
+        order_type: orderType,
+        // email: userEmail,
+        // user: userName
+    };
+
+    // Send the POST request to the server
+    fetch('/send_order_confirmation', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(orderDetails)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            // alert('Order confirmed and email sent successfully!');
+        } else {
+            // alert('Error sending email: ' + data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+});

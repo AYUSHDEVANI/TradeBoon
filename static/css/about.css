@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins","sans-serif";
+}
+
+
+a{
+  text-decoration: none;
+  color: black;
+  
+}
+canvas{
+width: 100% !important;
+}
+body{
+background-color: #c1ece7;
+}
+img{
+    object-fit: cover;
+}
+
+
+
+.about_us{
+    color: #073b3a;
+    font-weight: 900;
+    font-size: 14vb;
+    display: flex;
+    padding: 25vw 10vw 6vw 10vw;
+    justify-content: center;
+
+}
+
+.cont1,.who,.vision{
+    color: #073b3a;
+    display: flex;
+    font-size: 5vb;
+
+    font-weight: 500;
+    padding: 5vw 10vw 1vw 10vw;
+    
+}
+.content,.content3,.who1,.vision1{
+    display: flex;
+    flex-direction: column;
+    color: #073b3a;
+    font-weight: 500;
+    font-size: 3vb;
+    padding: 3vw 10vw 3vw 10vw;
+    justify-content: center;
+}
+.logo{
+    justify-content: center;
+    font-size: xx-large;
+    font-weight: 600;
+    
+
+}
+.secondend{
+    display: flex;
+    flex-direction: column;
+
+}
+li{
+    font-size: large;
+}
+.thirdend{
+    padding-bottom: 5.5vw;
+}
+.fourthdend{
+    padding-bottom: 2vw;
+}
+
+.end{
+    list-style: none;
+    background-color: whitesmoke;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    
+    gap: 20vb;
+    padding: 5vw 10vw 5vw 5vw;
+}
+.copyright{
+    background-color: whitesmoke;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 15px;
+    display: flex;
+    gap: 10px;
+    padding-left: 3vw;
+}
+
+svg{
+    width: 200px;
+    height: 200px;
+}
+
+.creator{
+    list-style-type: none;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    gap: 2vw;
+    align-items: center;
+    padding: 100px 200px 100px 200px;
+    
+}
+
+
+.impact a:hover,.socials a:hover,.copyright a:hover{
+    color: rgb(64, 64, 167);
+    transition: 0.3s ease;
+    
+}
+.creat1,.creat2,.creat3,.creat4{
+    padding: 10px 0px 0px 30px;
+    font-weight: 500;
+    display: row;
+    justify-content: center;
+}
+
+.sv1,.sv2,.sv3,.sv4{
+    
+    border-radius: 20px;
+    padding: 30px 20px 20px 20px;
+    background-color: rgba(240, 248, 255, 0.652);
+}

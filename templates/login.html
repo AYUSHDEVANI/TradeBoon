@@ -8,25 +8,11 @@
     <title>Login</title>
 </head>
 <body>
-    <h1>Login</h1>
-    <form method="POST" action="{{ url_for('login') }}">
-        {{ form.hidden_tag() }}
-        <div>
-            {{ form.username.label }} {{ form.username(size=32) }}<br>
-        </div>
-        <div>
-            {{ form.password.label }} {{ form.password(size=32) }}<br>
-        </div>
-        <div>
-            {{ form.submit() }}
-        </div>
-    </form>
     
-    <p>
-        <a href="{{ url_for('forgot_password') }}">Forgot Password?</a>
-    </p>
-
-    {% with messages = get_flashed_messages() %}
+    
+    <form method="POST" action="{{ url_for('login') }}">
+        <h1>Login</h1>
+        {% with messages = get_flashed_messages() %}
         {% if messages %}
             <ul>
                 {% for message in messages %}
@@ -35,5 +21,39 @@
             </ul>
         {% endif %}
     {% endwith %}
+        {{ form.hidden_tag() }}
+        <div>
+            {{ form.username.label }} {{ form.username(size=32) }}<br>
+        </div>
+        <div>
+            {{ form.password.label }} {{ form.password(size=32) }}<br>
+        </div>
+        <div id="loginbtn">
+            {{ form.submit() }}
+        </div>
+        <p>
+            <a href="{{ url_for('forgot_password') }}">Forgot Password?</a>
+        </p>
+    </form>
+    <div class="dotlottie-container">
+        <div class="gif">
+          <script
+            src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs"
+            type="module"
+          ></script>
+
+          <dotlottie-player
+            src="https://lottie.host/4bf24638-97c3-4e9a-aa40-6bcb0f317515/EuRJmKWMU0.json"
+            background="transparent"
+            speed="1"
+            style="width: 300px; height: 300px"
+            loop
+            autoplay
+          ></dotlottie-player>
+        </div>
+      </div>
+
+
+
 </body>
 </html>

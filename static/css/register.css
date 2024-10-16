@@ -1,22 +1,28 @@
 /* Import Bootstrap */
 @import url('https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css');
 
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
 /* Global Styles */
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    height: 100vh;
+    /* padding-top: 30%; */
+    padding-top: -20%;
+    background: linear-gradient(135deg, #e0f7fa, #f1f8e9); /* Light gradient */
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
+    /* height: 100vh; Set height to 100% of the viewport */
+    overflow: auto; /* Allow scrolling */
+    scale: .95;
 }
 
 ::selection {
-    background: #ff758c;
-    color: white;
+    background: #81d4fa; /* Light selection color */
+    color: black; /* Text color on selection */
 }
 
 /* Background Animation */
@@ -58,26 +64,25 @@ body {
 
 /* Register Form Container */
 .register-container {
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.9); /* Light background */
+    backdrop-filter: blur(5px);
     padding: 3rem;
     border-radius: 25px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1); /* Softer shadow */
     width: 100%;
     max-width: 600px;
-    text-align: center;
+    text-align: left; /* Align text to the left */
     position: relative;
     z-index: 2;
-    border: 2px solid rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.5); /* Light border */
 }
 
 /* Heading */
 h1 {
     font-size: 2.8rem;
-    color: white;
-    font-weight: 600;
+    color: #37474f; /* Darker text color for contrast */
+    font-weight: 700; /* Changed to Roboto bold weight */
     letter-spacing: 1px;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
     margin-bottom: 2rem;
     position: relative;
 }
@@ -87,7 +92,7 @@ h1::before {
     position: absolute;
     width: 100px;
     height: 4px;
-    background: #ff758c;
+    background: #80deea; /* Light accent color */
     bottom: -10px;
     left: 50%;
     transform: translateX(-50%);
@@ -97,35 +102,36 @@ h1::before {
 form {
     display: flex;
     flex-direction: column;
-    align-items: stretch;
-    color: white;
+    align-items: flex-start; /* Align items to the start (left) */
+    color: #37474f; /* Darker text color for contrast */
 }
 
 /* Input Fields */
 form input,
 form select {
+    width: 100%; /* Make input fields full width */
     padding: 1rem;
     margin: 0.75rem 0;
-    border: 2px solid rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(200, 200, 200, 0.6); /* Light border */
     border-radius: 15px;
     font-size: 1rem;
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
+    background: rgba(245, 245, 245, 0.9); /* Light background for inputs */
+    color: #37474f; /* Darker text color for inputs */
     transition: all 0.3s ease;
 }
 
 form input:focus,
 form select:focus {
-    border-color: #ff758c;
-    background: rgba(255, 255, 255, 0.2);
+    border-color: #80deea; /* Light border color on focus */
+    background: rgba(255, 255, 255, 1); /* Slightly brighter background on focus */
     outline: none;
-    box-shadow: 0 0 15px rgba(255, 117, 140, 0.5);
+    box-shadow: 0 0 15px rgba(128, 222, 234, 0.5); /* Soft shadow on focus */
 }
 
 /* Custom Submit Button */
 form input[type="submit"] {
-    background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%);
-    color: white;
+    background: linear-gradient(135deg, #80deea 0%, #b2ebf2 100%); /* Light gradient */
+    color: #37474f; /* Darker text color */
     border: none;
     font-size: 1.2rem;
     font-weight: bold;
@@ -136,18 +142,19 @@ form input[type="submit"] {
     letter-spacing: 1px;
     margin-top: 1rem;
     text-transform: uppercase;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Softer shadow */
+    width: 100%; /* Make submit button full width */
 }
 
 form input[type="submit"]:hover {
     transform: translateY(-5px);
-    box-shadow: 0 15px 30px rgba(255, 117, 140, 0.6);
+    box-shadow: 0 15px 30px rgba(128, 222, 234, 0.6); /* Soft shadow on hover */
 }
 
 /* OTP Section Button */
 button[type="submit"] {
-    background: linear-gradient(135deg, #76b2fe, #b69efe);
-    color: white;
+    background: linear-gradient(135deg, #81d4fa, #b2ebf2);
+    color: #37474f; /* Darker text color */
     border: none;
     font-size: 1.1rem;
     padding: 0.75rem 1.5rem;
@@ -160,7 +167,7 @@ button[type="submit"] {
 
 button[type="submit"]:hover {
     transform: translateY(-5px);
-    box-shadow: 0 15px 30px rgba(118, 178, 254, 0.6);
+    box-shadow: 0 15px 30px rgba(128, 222, 234, 0.6); /* Soft shadow on hover */
 }
 
 /* Flash Messages */
@@ -168,14 +175,14 @@ ul {
     list-style-type: none;
     padding: 0;
     margin-top: 1.5rem;
-    color: #ff5e5e;
+    color: #d32f2f; /* Darker red for contrast */
     font-size: 1rem;
 }
 
 ul li {
-    background: rgba(255, 94, 94, 0.1);
+    background: rgba(211, 47, 47, 0.1); /* Light red background */
     padding: 0.75rem;
-    border: 1px solid rgba(255, 94, 94, 0.4);
+    border: 1px solid rgba(211, 47, 47, 0.4); /* Light border */
     margin-bottom: 0.75rem;
     border-radius: 10px;
     transition: transform 0.3s ease;
@@ -214,3 +221,24 @@ ul li:hover {
         font-size: 1rem;
     }
 }
+
+
+.dotlottie-container{
+    /* position: absolute; */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    /* align-items:      ; */
+    scale: 2;
+}
+
+
+input[type="text"],
+input[type="password"],
+input[type="text"] ,
+input[type="email"] {
+    width:500px;}

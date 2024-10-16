@@ -63,6 +63,7 @@
 
         <div>{{ form.submit() }}</div>
       </form>
+      
 
       <p class="text-center mt-3">
         Already have an account? <a href="{{ url_for('login') }}">Login here</a>
@@ -75,5 +76,20 @@
       </ul>
       {% endif %} {% endwith %}
     </div>
+
+    <div class="dotlottie-container">
+        <script
+          src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs"
+          type="module"
+        ></script>
+        <dotlottie-player
+          src="https://lottie.host/4bf24638-97c3-4e9a-aa40-6bcb0f317515/EuRJmKWMU0.json"
+          background="transparent"
+          speed="1"
+          style="width: 300px; height: 300px"
+          loop
+          autoplay
+        ></dotlottie-player>
+      </div>
   </body>
 </html>

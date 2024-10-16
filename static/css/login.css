@@ -1,110 +1,146 @@
-/* Global Styles */
+/* General Styles */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Arial', sans-serif; /* Font family */
+    background: linear-gradient(to right, #f0f4f8, #d9e2ec); /* Light gradient background */
+    color: #333; /* Dark text color */
     margin: 0;
     padding: 0;
-    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100vh;
+    /* scale: 1; */
 }
 
-/* Login Form Container */
-h1 {
-    text-align: center;
-    color: #fff;
-    font-size: 2.5rem;
-    margin-bottom: 1.5rem;
-    /* margin-top: -25%; */
-    /* margin-left: 20%; */
-}
-
+/* Form Container */
 form {
-    background: #fff;
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-    max-width: 400px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    background: white; /* White background for the form */
+    border-radius: 15px; /* Rounded corners */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    padding: 40px; /* Padding inside the container */
+    width: 90%; /* Responsive width */
+    max-width: 400px; /* Max width for larger screens */
+    transition: transform 0.3s ease; /* Animation for scale */
 }
 
-/* Input Fields */
-form input {
-    font-size: 1rem;
-    padding: 0.75rem;
-    margin-bottom: 1.25rem;
-    border: 2px solid #ccc;
-    border-radius: 5px;
-    width: 100%;
-    transition: border-color 0.3s ease;
+/* Form Title */
+h1 {
+    font-size: 2rem; /* Title font size */
+    color: #007bff; /* Bootstrap primary color for title */
+    text-align: center; /* Center title */
+    margin-bottom: 20px; /* Space below title */
 }
 
-form input:hover, 
-form input:focus {
-    border-color: #6a11cb;
-    outline: none;
+/* Input Styles */
+input[type="text"], input[type="password"] {
+    width: 100%; /* Full width */
+    padding: 12px; /* Padding inside inputs */
+    margin: 10px 0; /* Margin above and below inputs */
+    border: 2px solid #007bff; /* Blue border */
+    border-radius: 8px; /* Rounded corners */
+    outline: none; /* Remove outline */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Transition for border color and shadow */
 }
 
-/* Submit Button */
-form input[type="submit"] {
-    background: linear-gradient(135deg, #ff7e5f 0%, #feb47b 100%);
-    color: #fff;
-    border: none;
-    font-size: 1.1rem;
-    font-weight: bold;
-    padding: 0.75rem;
-    cursor: pointer;
-    transition: background 0.3s ease;
-    border-radius: 5px;
-    width: 100%;
+/* Input Focus Styles */
+input[type="text"]:focus, input[type="password"]:focus {
+    border-color: #0056b3; /* Darker blue on focus */
+    box-shadow: 0 0 5px rgba(0, 86, 179, 0.5); /* Glow effect */
 }
 
-form input[type="submit"]:hover {
-    background: linear-gradient(135deg, #feb47b 0%, #ff7e5f 100%);
+/* Button Styles */
+button {
+    background-color: #007bff; /* Blue background */
+    color: white; /* White text */
+    border: none; /* Remove border */
+    padding: 12px; /* Padding inside button */
+    border-radius: 8px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-size: 2rem; /* Button font size */
+    width: 100%; /* Full width */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Transition for hover */
+    margin-left: 30%;
 }
 
-/* Flash Messages */
+/* Button Hover Styles */
+button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    transform: translateY(-2px); /* Lift effect on hover */
+}
+
+
+
+/* Forgot Password Link */
+p {
+    text-align: center; /* Center text */
+    margin-top: 15px; /* Space above */
+}
+
+p a {
+    color: #007bff; /* Blue color for links */
+    text-decoration: none; /* Remove underline */
+    transition: color 0.3s ease; /* Transition for color */
+}
+
+p a:hover {
+    color: #0056b3; /* Darker blue on hover */
+    text-decoration: underline; /* Underline on hover */
+}
+
+/* Message List */
 ul {
-    list-style-type: none;
-    padding: 0;
-    margin-top: 1.5rem;
-    text-align: center;
+    list-style-type: none; /* Remove bullet points */
+    padding: 0; /* No padding */
+    margin: 20px 0; /* Margin above and below */
+    color: #d32f2f; /* Red color for error messages */
 }
 
-ul li {
-    background: rgba(255, 94, 94, 0.1);
-    padding: 0.75rem;
-    border: 1px solid rgba(255, 94, 94, 0.4);
-    color: #ff5e5e;
-    margin-bottom: 0.75rem;
-    border-radius: 5px;
-}
-
-/* Responsive Design */
+/* Responsive Adjustments */
 @media (max-width: 768px) {
     form {
-        padding: 1.5rem;
+        padding: 20px; /* Less padding on smaller screens */
     }
-
+    
     h1 {
-        font-size: 2rem;
+        font-size: 1.5rem; /* Smaller title on mobile */
+    }
+    
+    button {
+        font-size: 0.9rem; /* Smaller button font size */
     }
 }
 
-@media (max-width: 480px) {
-    form {
-        padding: 1rem;
-    }
+/* Animation for Form Container */
+form {
+    animation: fadeIn 0.5s ease-in-out; /* Fade in animation */
+}
 
-    h1 {
-        font-size: 1.75rem;
+/* Fade In Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0; /* Start from transparent */
+        transform: translateY(-20px); /* Slide from above */
     }
-
-    form input {
-        font-size: 0.9rem;
+    to {
+        opacity: 1; /* Fade in */
+        transform: translateY(0); /* End position */
     }
 }
+
+#loginbtn input:hover {
+    background-color: #0e1a85; /* Darker green on hover */
+}
+ #loginbtn{
+    margin-top: 20px;
+    margin-left: 40%;
+ }
+ #loginbtn input{
+    background-color: #007bff;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+ }
+ 

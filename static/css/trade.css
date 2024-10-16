@@ -363,7 +363,7 @@ header button:hover {
     border-radius: 10px;
     border: 1px solid #ddd;
     padding: 10px;
-    padding-right: 7%;
+    padding-right: 13%;
 }
 
 #portfolioImpactGraph {
@@ -373,5 +373,6 @@ header button:hover {
     border-radius: 10px;
     border: 1px solid #ddd;
     padding: 10px;
-    padding-right: 7%;
+    padding-right: 13%;
 }
+

@@ -354,3 +354,14 @@ header button:hover {
 .toggle-label span {
     font-weight: bold;
 }
+
+
+#performanceGraph {
+    width: 100%;
+    height: 400px;
+    background: #f4f4f9;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    padding-right: 7%;
+}

@@ -1,257 +1,168 @@
-/* Nav Bar */
-
-header{
-    background: #2a869270;
-    height: 66px;
-}
-
-body{
-    background: #f5eeee;
-    padding: 0px;
-    margin: 0px;
-}
-
-header .logo{
-    float:left;
-    height: inherit;
-    margin-left: 2em;
-
-}
-
-
-header .logo-text{
-    margin: 10px;
-}
-header ul{
-    float: right;
-    margin: 0px;
-    padding: 0px;
-    list-style-type: none;
-}
-
-header *{
-    color: #f5eeee;
-}
-
-*{
-    box-sizing: border-box;
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    font-family: "Inter", sans-serif;
+    background-color: #f4f4f4;
 }
 
-header ul li{
-    float: left;
+h1, h3 {
+    color: #333;
 }
 
-header ul li a{
-    display: block;
-    padding: 21px;
-    font-size: 1.5em;
-    text-decoration: none;
-}
-
-header ul li a:hover{
-    background: rgb(113, 222, 203);
-    transition: 0.5s;
-}
-
-.stock{
-    position: absolute;
+/* Image Section */
+.image {
     width: 100%;
-    height: 100%;
-    opacity: 0.5;
-}
-
-.about{
-    background-color: rgb(0, 0, 1);
-    height: 30%;
-    font-size: 50px;
-    color: rgba(255, 254, 254, 0.958);
-    padding-left: 35%;
-    align-content: center;
-    width: 100%;
-    margin-top: 50px; ;
-}
-
-.menu{
-    width:100%;
-    padding:30px;
     position: relative;
-
 }
 
-.menu h1{
-    font-size:55px;
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 30px;
-    color: aliceblue;
-    background-color: rgb(47, 6, 6);
-}
-
-.menu .box{
-    width: 95%;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-gap:15px;
-
-}
-
-
-.menu .box .card{
-    width:300px;
-    height: 400px;
-    padding-top: 10px;
-    margin-bottom: 20px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.2);
-}
-
-.menu .box .card .image{
-    width:300px;
-    height: 245px;
-    margin: 0 auto;
-    overflow: hidden;
-}
-
-.menu .box .card .image img{
+.image img.stock {
     width: 100%;
-    height: 100%;
+    height: auto;
     object-fit: cover;
-    object-position: center;
-    transition: 0.3s;
 }
 
-.menu .box .card .image:hover img{
-    transform: scale(1.1);
+.about {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin: 20px 0;
+    color: #0056b3;
 }
 
-.menu .box .card .small_card{
-    width:45px;
-    height:45px;
-    float:right;
-    position: relative;
-    top:-250px;
-    right:6px;
-    opacity: 1;
-    border-radius: 7px;
-    transition:0.3s;
-
+/* News Card Section */
+.menu {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 20px;
+    background-color: #fff;
 }
 
-.menu .box .card:hover .small_card{
-    position:relative;
-    top:-240px;
-    right:20px;
-    opacity: 1;
+.box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 1100px;
+    gap: 20px;
+    width: 100%;
 }
 
-.menu .box .card .small_card i{
-    font-size: 25px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    line-height:50px;
-    color:black;
-    cursor:pointer;
-    text-shadow: 0 0 6px rgb(251, 251, 251);
-    transition:0.2s;
+/* Card Styles */
+.card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 500px;
+    transition: transform 0.3s ease-in-out;
 }
 
-.menu .box .card .small_card i:hover{
-
-    color: red;
+.card:hover {
+    transform: translateY(-10px);
 }
 
+.card .image img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
 
+.card .small_card {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: #ff4b4b;
+    color: white;
+    padding: 8px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+}
 
-
-.menu .box .card .info h3{
-    text-align:center;
-    margin-top:10px;
+.card .info {
     padding: 15px;
 }
 
-.menu .box .card .info .button{
-    display:flex;
-    align-items:center;
-    justify-content: center;
-    text-decoration: none;
-    color:white;
-    background:rgba(2, 13, 24, 0.77);
-    padding: 8px 10px;
-    margin: 0 80px;
-    transition: 0.3s;
+.card .info h3 {
+    font-size: 1.1rem;
+    color: #333;
+    margin: 10px 0;
 }
 
+.card .info .button {
+    display: inline-block;
+    padding: 8px 15px;
+    background-color: #0056b3;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    margin-top: 10px;
+}
 
-/* footer */
-.footer{
-    background-color: #ececec;
+.card .info .button:hover {
+    background-color: #004494;
+}
+
+/* Responsive Layout */
+@media (max-width: 768px) {
+    .menu {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .box {
+        justify-content: center;
+    }
+
+    .card {
+        width: 90%;
+        margin-bottom: 20px;
+    }
+}
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: white;
+    padding: 40px 0;
+    margin-top: 1%;
+    /* text-align: center; */
+}
+
+footer .footer {
     display: flex;
-    justify-content: space-between;
-    padding: 10vw 10vw;
-    top: 10vw;
-    left: 10vw;
-
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
 }
 
-.quicklinks a{
+footer .footer div {
+    margin-bottom: 20px;
+}
+
+footer h2 {
+    font-size: 1.4rem;
+    color: white;
+}
+
+footer a {
+    color: #ccc;
     text-decoration: none;
-    font-size: 1em;
-    display: grid;
-    padding: 0vw;
-}
-.social{
-    color: black;
-    text-decoration: none;
-    
-    display: grid;
-    justify-content: center;
-}
-.social a{
-    color: gray;
-    text-decoration: none;
-    font-size: 1em;
-    display: grid;
-    
 }
 
-.app h2{
-    font-weight: 600;
-    
-}
-.apt{
-    text-decoration: none;
-    display: grid;
+footer a:hover {
+    color: white;
+    text-decoration: underline;
 }
 
-.appstore{
-    width: 150px;
-}
-.bellow{
-    padding: 6px;
-    font-weight: 600;
-    padding-left: 500px;
-    background-color: #c9cacc00;
-    justify-items: center;
-    align-items: center;
+.bellow {
+    background-color: #222;
+    color: #aaa;
+    padding: 10px;
+    font-size: 0.9rem;
 }
 
-.quick1 a{
-    color: gray;
-}
-.quick1 :hover,
-.social a:hover{
-    color: black;
-}
-
-.appstore:hover,
-.quick1 :hover,
-.social a:hover,
-.text:hover{
-    transform: translateY(2px);
+.bellow p {
+    margin: 0;
 }

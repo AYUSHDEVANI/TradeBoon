@@ -302,7 +302,7 @@ function submitOrder(orderType) {
     }
 
     const totalValue = quantity * price;
-    const orderDetails = `Type: ${orderType}, Stock: ${stock}, Quantity: ${quantity}, Price: $${price}, Total: $${totalValue}`;
+    const orderDetails = `Type: ${orderType}, Stock: ${stock}, Quantity: ${quantity}, Price: ₹${price}, Total: ₹${totalValue}`;
     
     // Display confirmation dialog
     document.getElementById('orderDetails').textContent = orderDetails;
@@ -668,9 +668,9 @@ function renderMarketSentimentGraph(sentimentData) {
 function displayPortfolioImpact(impactData) {
     const impactContainer = document.getElementById('portfolioImpactContainer'); // Assuming you have a container for this
     impactContainer.innerHTML = `
-        <p>Balance: $${impactData.balance.toFixed(2)}</p>
-        <p>Total Investment: $${impactData.total_investment.toFixed(2)}</p>
-        <p>Unrealized Profit/Loss: $${impactData.unrealized_profit_loss.toFixed(2)}</p>
+        <p>Balance: ₹${impactData.balance.toFixed(2)}</p>
+        <p>Total Investment: ₹${impactData.total_investment.toFixed(2)}</p>
+        <p>Unrealized Profit/Loss: ₹${impactData.unrealized_profit_loss.toFixed(2)}</p>
     `;
 }
 

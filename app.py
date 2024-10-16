@@ -901,8 +901,8 @@ def send_order_confirmation():
     Stock: {stock_symbol}
     Order Type: {order_type.capitalize()} 
     Quantity: {quantity}
-    Price per Share: ₹{price:.2f}
-    Total Amount: ₹{total_amount:.2f}
+    Price per Share: ₹{price:.4f}
+    Total Amount: ₹{total_amount:.4f}
 
     Thank you for trading with TradeBoon!
 

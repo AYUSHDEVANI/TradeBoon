@@ -13,6 +13,7 @@ class RegistrationForm(FlaskForm):
     confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
     email = EmailField('Email', validators=[DataRequired()])
     full_name = StringField('Full Name', validators=[DataRequired()])
+    gender = SelectField('Gender', choices=[('male', 'Male'), ('female', 'Female'), ('other', 'Other')], validators=[DataRequired()])
     date_of_birth = DateField('Date of Birth', format='%Y-%m-%d', validators=[DataRequired()])
     phone_number = StringField('Phone Number', validators=[DataRequired(), Length(min=10, max=15)])
     government_id_type = SelectField('Government ID Type', choices=[('Aadhar', 'Aadhar'), ('PAN', 'PAN'), ('Passport', 'Passport')], validators=[DataRequired()])

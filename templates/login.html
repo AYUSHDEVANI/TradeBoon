@@ -4,16 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+
     <title>Login</title>
 </head>
 <body>
     <h1>Login</h1>
     <form method="POST" action="{{ url_for('login') }}">
         {{ form.hidden_tag() }}
-        {{ form.username.label }} {{ form.username(size=32) }}<br>
-        {{ form.password.label }} {{ form.password(size=32) }}<br>
-        {{ form.submit() }}
+        <div>
+            {{ form.username.label }} {{ form.username(size=32) }}<br>
+        </div>
+        <div>
+            {{ form.password.label }} {{ form.password(size=32) }}<br>
+        </div>
+        <div>
+            {{ form.submit() }}
+        </div>
     </form>
+    
+    <p>
+        <a href="{{ url_for('forgot_password') }}">Forgot Password?</a>
+    </p>
+
     {% with messages = get_flashed_messages() %}
         {% if messages %}
             <ul>

@@ -13,6 +13,7 @@ import dash
 from dash import dcc, html
 from dash.dependencies import Output, Input
 import plotly.graph_objs as go
+from datetime import datetime as dt
 
 app = Flask(__name__)
 app.secret_key = '1718'  # Replace with a random secret key
@@ -149,6 +150,14 @@ def register():
             flash('Username already exists!', 'danger')
             return redirect(url_for('register'))
         
+        dob = form.date_of_birth.data
+        today = dt.today()
+        age = today.year - dob.year - ((today.month, today.day) < (dob.month, dob.day))
+
+        if age < 18:
+            flash('You must be at least 18 years old to register.', 'danger')
+            return redirect(url_for('register'))
+        
         if "send_otp" in request.form:
             # Generate a random 6-digit OTP
             otp = str(random.randint(100000, 999999))
@@ -191,6 +200,7 @@ def register():
                     'password_hash': password_hash,
                     'email': form.email.data,
                     'full_name': form.full_name.data,
+                    "gender" : form.gender.data,
                     'date_of_birth': date_of_birth,
                     'phone_number': form.phone_number.data,
                     'government_id_type': form.government_id_type.data,
@@ -305,6 +315,46 @@ stocks = [
         {'date': '2024-10-04', 'price': 108},
         {'date': '2024-10-05', 'price': 110},
 ]
+
+
+
+@app.route("/forgot_password", methods=['GET', 'POST'])
+def forgot_password():
+    # if request.method == 'POST':
+    #     username = request.form.get('username')
+    #     email = request.form.get('email')
+    #     user = mongo.db.users.find_one({'username': username})
+    #     if user:
+    #         # Generate a random 6-digit OTP
+    #         otp = str(random.randint(100000, 999999))
+    #         otp_storage[email] = otp
+
+    #         # Create and send the OTP email
+    #         msg = Message('Your OTP Code', sender=app.config['MAIL_USERNAME'], recipients=[email])
+    #         msg.body = f'Your OTP code is: {otp}'
+    #         mail.send(msg)
+
+    #         flash('OTP sent successfully! Please check your email.', 'success')
+    #         return redirect(url_for('reset_password', email=email))
+    #     if "verify_otp" in request.form:
+    #         email = request.form.get('email')
+    #         entered_otp = request.form.get('otp')
+    #         if  str(otp_storage[email]) == str(entered_otp):
+    #             del otp_storage[email]
+    #             flash('OTP verified successfully! Please reset your password.', 'success')
+    #             return redirect(url_for('reset_password', email=email))
+            
+
+    #     else:
+    #         flash('No account found with this email.', 'danger')
+    #         return redirect(url_for('forgot_password'))
+        
+
+
+    return render_template('login.html')
+
+        
+
 
 @app.route('/dashboard')
 @login_required

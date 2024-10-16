@@ -1,81 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Register</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
-</head>
-<body>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/register.css') }}"
+    />
+  </head>
+  <body>
     <div class="register-container">
-        <h1>Register</h1>
-        <form method="POST" action="{{ url_for('register') }}">
-            {{ form.hidden_tag() }}
-            <div>
-                {{ form.username.label }} 
-                {{ form.username(size=32) }}<br>
-            </div>
-            <div>
-                {{ form.password.label }} 
-                {{ form.password(size=32) }}<br>
-            </div>
-            <div>
-                {{ form.confirm_password.label }} 
-                {{ form.confirm_password(size=32) }}<br>
-            </div>
-            <div>
-                {{ form.email.label }} 
-                {{ form.email(size=32) }}<br>
-            </div>
-            <div>
-                {{ form.full_name.label }} 
-                {{ form.full_name(size=32) }}<br>
-            </div>
-            <div>
-                {{ form.date_of_birth.label }} 
-                {{ form.date_of_birth() }}<br>
-            </div>
-            <div>
-                {{ form.phone_number.label }} 
-                {{ form.phone_number(size=32) }}<br>
-            </div>
-            <div>
-                {{ form.government_id_type.label }} 
-                {{ form.government_id_type() }}<br>
-            </div>
-            <div>
-                {{ form.government_id_number.label }} 
-                {{ form.government_id_number(size=32) }}<br>
-            </div>
+      <h1>Register</h1>
+      <form method="POST" action="{{ url_for('register') }}">
+        {{ form.hidden_tag() }}
+        <div>{{ form.username.label }} {{ form.username(size=32) }}<br /></div>
+        <div>{{ form.password.label }} {{ form.password(size=32) }}<br /></div>
+        <div>
+          {{ form.confirm_password.label }} {{ form.confirm_password(size=32)
+          }}<br />
+        </div>
+        <div>{{ form.email.label }} {{ form.email(size=32) }}<br /></div>
+        <div>
+          {{ form.full_name.label }} {{ form.full_name(size=32) }}<br />
+        </div>
+        <!-- Gender Selection -->
+        <div>
+          <label for="gender">Gender:</label>
+          <select id="gender" name="gender" required>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
 
-            <!-- OTP Verification Section -->
-            {% if otp_sent %}
-            <div>
-                <label for="otp">Enter the OTP sent to your email:</label>
-                <input type="text" id="otp" name="otp" required>
-                <button type="submit" name="verify_otp">Verify OTP</button>
-            </div>
-            {% else %}
-            <div>
-                <button type="submit" name="send_otp">Send OTP</button>
-            </div>
-            {% endif %}
+        <div>
+          {{ form.date_of_birth.label }} {{ form.date_of_birth() }}<br />
+        </div>
+        <div>
+          {{ form.phone_number.label }} {{ form.phone_number(size=32) }}<br />
+        </div>
+        <div>
+          {{ form.government_id_type.label }} {{ form.government_id_type() }}<br />
+        </div>
+        <div>
+          {{ form.government_id_number.label }} {{
+          form.government_id_number(size=32) }}<br />
+        </div>
 
-            <div>
-                {{ form.submit() }}
-            </div>
-        </form>
+        <!-- OTP Verification Section -->
+        {% if otp_sent %}
+        <div>
+          <label for="otp">Enter the OTP sent to your email:</label>
+          <input type="text" id="otp" name="otp" required />
+          <button type="submit" name="verify_otp">Verify OTP</button>
+        </div>
+        {% else %}
+        <div>
+          <button type="submit" name="send_otp">Send OTP</button>
+        </div>
+        {% endif %}
 
-        <p class="text-center mt-3">Already have an account? <a href="{{ url_for('login') }}">Login here</a></p>
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                <ul>
-                    {% for message in messages %}
-                        <li>{{ message }}</li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
-        {% endwith %}
+        <div>{{ form.submit() }}</div>
+      </form>
+
+      <p class="text-center mt-3">
+        Already have an account? <a href="{{ url_for('login') }}">Login here</a>
+      </p>
+      {% with messages = get_flashed_messages() %} {% if messages %}
+      <ul>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %} {% endwith %}
     </div>
-</body>
+  </body>
 </html>

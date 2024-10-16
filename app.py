@@ -626,9 +626,9 @@ def portfolio_overview():
 @login_required
 def get_transactions():
     username = current_user.username
-    # print(username)
-    transactions = mongo.db.orders.find({"username": username})  # Fetch transactions by username
-    # print("transaction", transactions)
+    print(username)
+    transactions = mongo.db.orders.find({"username": username}).sort("date",-1).limit(10)  # Fetch transactions by username
+    print("transaction", transactions)
     
     transaction_list = []
     for transaction in transactions:

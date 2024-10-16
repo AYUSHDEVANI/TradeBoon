@@ -483,7 +483,7 @@ function calculateUnrealizedProfitLoss(transactions, currentBalance) {
             transactionBody.append(row);
         });
     }
-    fetchTransactions();  // Fetch transactions on page load
+fetchTransactions();  // Fetch transactions on page load
 
 
 
